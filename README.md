@@ -17,13 +17,49 @@ A full-stack MERN (MongoDB, Express, React, Node.js) calendar application with a
 
 ## Prerequisites
 
-- Node.js (v18+)
-- MongoDB (local or Atlas)
-- npm or yarn
+- Node.js (v18+) - for local development
+- Docker & Docker Compose
+- MongoDB (local or Atlas) - for local development
 
 ---
 
-## Installation & Setup
+## Quick Start with Docker
+
+The easiest way to run the application:
+
+### 1. Clone and run
+
+```bash
+cd mern-calendar-app
+docker-compose up --build
+```
+
+This will start:
+- **MongoDB** on port `27017`
+- **Backend** on port `5000`
+- **Frontend** on port `5173`
+
+### 2. Open browser
+
+```
+http://localhost:5173
+```
+
+### 3. Seed the database
+
+```bash
+docker-compose exec backend npm run seed
+```
+
+### Stop Docker
+
+```bash
+docker-compose down
+```
+
+---
+
+## Manual Installation & Setup
 
 ### 1. Clone the repository
 

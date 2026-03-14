@@ -6,6 +6,7 @@ export interface IEvent extends Document {
   description: string;
   createdBy: Types.ObjectId;
   createdAt: Date;
+  deletedAt?: Date;
 }
 
 const EventSchema = new Schema<IEvent>(
@@ -14,6 +15,7 @@ const EventSchema = new Schema<IEvent>(
     date: { type: Date, required: true },
     description: { type: String, required: true },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    deletedAt: { type: Date }
   },
   { timestamps: true }
 );

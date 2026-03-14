@@ -5,7 +5,9 @@ import { sendEmail } from '../services/emailService';
 
 export const getEvents = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const events = await Event.find({ createdBy: req.user?.id }).select('email date');
+    const events = await Event.find({ 
+      createdBy: req.user?.id, deletedAt: null })
+      .select('email date');
     res.json(events);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: (error as Error).message });
@@ -58,7 +60,11 @@ export const deleteEvent = async (req: AuthRequest, res: Response): Promise<void
   try {
     const { id } = req.params;
 
-    const event = await Event.findOneAndDelete({ _id: id, createdBy: req.user?.id });
+    
+    const event = await Event.findOneAndUpdate(
+      { _id: id, createdBy: req.user?.id },
+      { deletedAt: new Date() }
+    );
 
     if (!event) {
       res.status(404).json({ message: 'Event not found' });
